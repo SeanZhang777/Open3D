@@ -60,7 +60,7 @@ TEST(PointCloud, Constructor) {
     EXPECT_FALSE(pc.HasColors());
 }
 
-TEST(PointCloud, DISABLED_MemberData) { unit_test::NotImplemented(); }
+TEST(PointCloud, DISABLED_MemberData) { NotImplemented(); }
 
 TEST(PointCloud, Clear) {
     int size = 100;
@@ -408,9 +408,7 @@ TEST(PointCloud, OperatorADD) {
     }
 }
 
-TEST(PointCloud, DISABLED_CreatePointCloudFromFile) {
-    unit_test::NotImplemented();
-}
+TEST(PointCloud, DISABLED_CreatePointCloudFromFile) { NotImplemented(); }
 
 TEST(PointCloud, SelectByIndex) {
     std::vector<Eigen::Vector3d> ref = {{796.078431, 909.803922, 196.078431},
