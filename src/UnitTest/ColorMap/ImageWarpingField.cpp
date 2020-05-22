@@ -187,7 +187,7 @@ TEST(ImageWarpingField, QueryFlow) {
     // open3d::ImageWarpingField field(width, height, nr_anchors);
 
     // for (size_t i = 0; i < ref_output.size(); i++)
-    //     ExpectEQ(ref_output[i], field.QueryFlow(x[i], y[i]));
+    //     ExpectNear(ref_output[i], field.QueryFlow(x[i], y[i]));
 }
 
 TEST(ImageWarpingField, GetImageWarpingField) {
@@ -233,7 +233,7 @@ TEST(ImageWarpingField, GetImageWarpingField) {
     // {
     //     Eigen::Vector2d elem = field.GetImageWarpingField(x[i], y[i]);
 
-    //     ExpectEQ(ref_output[i], elem);
+    //     ExpectNear(ref_output[i], elem);
     // }
 }
 

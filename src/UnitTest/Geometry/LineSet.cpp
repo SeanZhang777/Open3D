@@ -47,8 +47,8 @@ TEST(LineSet, Constructor) {
     // public members
     EXPECT_TRUE(ls.IsEmpty());
 
-    ExpectEQ(Eigen::Vector3d(0, 0, 0), ls.GetMinBound());
-    ExpectEQ(Eigen::Vector3d(0, 0, 0), ls.GetMaxBound());
+    ExpectNear(Eigen::Vector3d(0, 0, 0), ls.GetMinBound());
+    ExpectNear(Eigen::Vector3d(0, 0, 0), ls.GetMaxBound());
 
     EXPECT_FALSE(ls.HasPoints());
     EXPECT_FALSE(ls.HasLines());
@@ -78,9 +78,9 @@ TEST(LineSet, Clear) {
 
     EXPECT_FALSE(ls.IsEmpty());
 
-    ExpectEQ(Eigen::Vector3d(19.607843, 0.0, 0.0), ls.GetMinBound());
-    ExpectEQ(Eigen::Vector3d(996.078431, 996.078431, 996.078431),
-             ls.GetMaxBound());
+    ExpectNear(Eigen::Vector3d(19.607843, 0.0, 0.0), ls.GetMinBound());
+    ExpectNear(Eigen::Vector3d(996.078431, 996.078431, 996.078431),
+               ls.GetMaxBound());
 
     EXPECT_TRUE(ls.HasPoints());
     EXPECT_TRUE(ls.HasLines());
@@ -90,8 +90,8 @@ TEST(LineSet, Clear) {
 
     // public members
     EXPECT_TRUE(ls.IsEmpty());
-    ExpectEQ(Eigen::Vector3d(0, 0, 0), ls.GetMinBound());
-    ExpectEQ(Eigen::Vector3d(0, 0, 0), ls.GetMaxBound());
+    ExpectNear(Eigen::Vector3d(0, 0, 0), ls.GetMinBound());
+    ExpectNear(Eigen::Vector3d(0, 0, 0), ls.GetMaxBound());
 
     EXPECT_FALSE(ls.HasPoints());
     EXPECT_FALSE(ls.HasLines());
@@ -127,7 +127,7 @@ TEST(LineSet, GetMinBound) {
 
     Rand(ls.points_, vmin, vmax, 0);
 
-    ExpectEQ(Eigen::Vector3d(19.607843, 0.0, 0.0), ls.GetMinBound());
+    ExpectNear(Eigen::Vector3d(19.607843, 0.0, 0.0), ls.GetMinBound());
 }
 
 TEST(LineSet, GetMaxBound) {
@@ -142,8 +142,8 @@ TEST(LineSet, GetMaxBound) {
 
     Rand(ls.points_, vmin, vmax, 0);
 
-    ExpectEQ(Eigen::Vector3d(996.078431, 996.078431, 996.078431),
-             ls.GetMaxBound());
+    ExpectNear(Eigen::Vector3d(996.078431, 996.078431, 996.078431),
+               ls.GetMaxBound());
 }
 
 TEST(LineSet, Transform) {
@@ -179,8 +179,8 @@ TEST(LineSet, Transform) {
 
     ls.Transform(transformation);
 
-    ExpectEQ(ref_points, ls.points_);
-    ExpectEQ(ref_lines, ls.lines_);
+    ExpectNear(ref_points, ls.points_);
+    ExpectNear(ref_lines, ls.lines_);
 }
 
 TEST(LineSet, PaintUniformColor) {
@@ -207,7 +207,7 @@ TEST(LineSet, PaintUniformColor) {
     EXPECT_TRUE(ls.HasColors());
 
     for (size_t i = 0; i < ls.colors_.size(); i++)
-        ExpectEQ(color, ls.colors_[i]);
+        ExpectNear(color, ls.colors_[i]);
 }
 
 TEST(LineSet, OperatorAppend) {
@@ -255,23 +255,23 @@ TEST(LineSet, OperatorAppend) {
 
     EXPECT_EQ(2 * size, ls.points_.size());
     for (size_t i = 0; i < size; i++) {
-        ExpectEQ(ls0.points_[i], ls.points_[i + 0]);
-        ExpectEQ(ls1.points_[i], ls.points_[i + size]);
+        ExpectNear(ls0.points_[i], ls.points_[i + 0]);
+        ExpectNear(ls1.points_[i], ls.points_[i + size]);
     }
 
     EXPECT_EQ(2 * size, ls.lines_.size());
     for (size_t i = 0; i < size; i++) {
-        ExpectEQ(ls0.lines_[i], ls.lines_[i + 0]);
+        ExpectNear(ls0.lines_[i], ls.lines_[i + 0]);
 
         Eigen::Vector2i ls1_line_i = {ls1.lines_[i](0, 0) + size,
                                       ls1.lines_[i](1, 0) + size};
-        ExpectEQ(ls1_line_i, ls.lines_[i + ls0.lines_.size()]);
+        ExpectNear(ls1_line_i, ls.lines_[i + ls0.lines_.size()]);
     }
 
     EXPECT_EQ(2 * size, ls.colors_.size());
     for (size_t i = 0; i < size; i++) {
-        ExpectEQ(ls0.colors_[i], ls.colors_[i + 0]);
-        ExpectEQ(ls1.colors_[i], ls.colors_[i + size]);
+        ExpectNear(ls0.colors_[i], ls.colors_[i + 0]);
+        ExpectNear(ls1.colors_[i], ls.colors_[i + size]);
     }
 }
 
@@ -319,23 +319,23 @@ TEST(LineSet, OperatorADD) {
 
     EXPECT_EQ(2 * size, ls.points_.size());
     for (size_t i = 0; i < size; i++) {
-        ExpectEQ(ls0.points_[i], ls.points_[i + 0]);
-        ExpectEQ(ls1.points_[i], ls.points_[i + size]);
+        ExpectNear(ls0.points_[i], ls.points_[i + 0]);
+        ExpectNear(ls1.points_[i], ls.points_[i + size]);
     }
 
     EXPECT_EQ(2 * size, ls.lines_.size());
     for (size_t i = 0; i < size; i++) {
-        ExpectEQ(ls0.lines_[i], ls.lines_[i + 0]);
+        ExpectNear(ls0.lines_[i], ls.lines_[i + 0]);
 
         Eigen::Vector2i ls1_line_i = {ls1.lines_[i](0, 0) + size,
                                       ls1.lines_[i](1, 0) + size};
-        ExpectEQ(ls1_line_i, ls.lines_[i + ls0.lines_.size()]);
+        ExpectNear(ls1_line_i, ls.lines_[i + ls0.lines_.size()]);
     }
 
     EXPECT_EQ(2 * size, ls.colors_.size());
     for (size_t i = 0; i < size; i++) {
-        ExpectEQ(ls0.colors_[i], ls.colors_[i + 0]);
-        ExpectEQ(ls1.colors_[i], ls.colors_[i + size]);
+        ExpectNear(ls0.colors_[i], ls.colors_[i + 0]);
+        ExpectNear(ls1.colors_[i], ls.colors_[i + size]);
     }
 }
 
@@ -420,8 +420,8 @@ TEST(LineSet, GetLineCoordinate) {
     for (size_t i = 0; i < size; i++) {
         auto result = ls.GetLineCoordinate(i);
 
-        ExpectEQ(ref_points[i][0], result.first);
-        ExpectEQ(ref_points[i][1], result.second);
+        ExpectNear(ref_points[i][0], result.first);
+        ExpectNear(ref_points[i][1], result.second);
     }
 }
 
@@ -491,8 +491,8 @@ TEST(LineSet, CreateLineSetFromPointCloudCorrespondences) {
     auto ls = geometry::LineSet::CreateFromPointCloudCorrespondences(
             pc0, pc1, correspondence);
 
-    ExpectEQ(ref_points, ls->points_);
-    ExpectEQ(ref_lines, ls->lines_);
+    ExpectNear(ref_points, ls->points_);
+    ExpectNear(ref_lines, ls->lines_);
 }
 
 }  // namespace unit_test
