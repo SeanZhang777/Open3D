@@ -42,15 +42,15 @@
 #include "UnitTest/TestUtility/Sort.h"
 
 // GPU_CONDITIONAL_COMPILE_STR is "" if gpu is available, otherwise "DISABLED_"
-// The GPU_CONDITIONAL_COMPILE_STR value is configured in CMake
+// The GPU_CONDITIONAL_COMPILE_STR value is configured in CMake.
 #define CUDA_CONDITIONAL_TEST(test_name) \
     OPEN3D_CONCATENATE(GPU_CONDITIONAL_TEST_STR, test_name)
 
 namespace open3d {
 namespace unit_test {
 
-// thresholds for comparing floating point values
-const double THRESHOLD_1E_6 = 1e-6;
+// Thresholds for comparing floating point values
+static const double THRESHOLD_1E_6 = 1e-6;
 
 // Mechanism for reporting unit tests for which there is no implementation yet.
 void NotImplemented();
