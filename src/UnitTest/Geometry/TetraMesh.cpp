@@ -48,8 +48,8 @@ TEST(TetraMesh, Constructor) {
     // public members
     EXPECT_TRUE(tm.IsEmpty());
 
-    ExpectEQ(Zero3d, tm.GetMinBound());
-    ExpectEQ(Zero3d, tm.GetMaxBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), tm.GetMinBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), tm.GetMaxBound());
 
     EXPECT_FALSE(tm.HasVertices());
     EXPECT_FALSE(tm.HasTetras());
@@ -88,8 +88,8 @@ TEST(TetraMesh, Clear) {
     // public members
     EXPECT_TRUE(tm.IsEmpty());
 
-    ExpectEQ(Zero3d, tm.GetMinBound());
-    ExpectEQ(Zero3d, tm.GetMaxBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), tm.GetMinBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), tm.GetMaxBound());
 
     EXPECT_FALSE(tm.HasVertices());
     EXPECT_FALSE(tm.HasTetras());

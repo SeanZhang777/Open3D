@@ -38,8 +38,6 @@ TEST(Eigen, TransformVector6dToMatrix4d) {
 
     Eigen::Vector6d vector6d = Eigen::Vector6d::Zero();
 
-    ExpectEQ(Zero6d, vector6d);
-
     for (int i = 0; i < 6; i++) vector6d(i, 0) = (i + 1) / 6.0;
 
     Eigen::Matrix4d matrix4d = utility::TransformVector6dToMatrix4d(vector6d);

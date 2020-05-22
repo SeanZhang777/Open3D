@@ -52,8 +52,8 @@ TEST(PointCloud, Constructor) {
     // public members
     EXPECT_TRUE(pc.IsEmpty());
 
-    ExpectEQ(Zero3d, pc.GetMinBound());
-    ExpectEQ(Zero3d, pc.GetMaxBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), pc.GetMinBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), pc.GetMaxBound());
 
     EXPECT_FALSE(pc.HasPoints());
     EXPECT_FALSE(pc.HasNormals());
@@ -92,8 +92,8 @@ TEST(PointCloud, Clear) {
     // public members
     EXPECT_TRUE(pc.IsEmpty());
 
-    ExpectEQ(Zero3d, pc.GetMinBound());
-    ExpectEQ(Zero3d, pc.GetMaxBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), pc.GetMinBound());
+    ExpectEQ(Eigen::Vector3d(0, 0, 0), pc.GetMaxBound());
 
     EXPECT_FALSE(pc.HasPoints());
     EXPECT_FALSE(pc.HasNormals());
@@ -299,15 +299,19 @@ TEST(PointCloud, OperatorAppend) {
     pc1.normals_.resize(size);
     pc1.colors_.resize(size);
 
-    Rand(pc0.points_, Zero3d, Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
+    Rand(pc0.points_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
     Rand(pc0.normals_, Eigen::Vector3d(-1.0, -1.0, -1.0),
          Eigen::Vector3d(1.0, 1.0, 1.0), 0);
-    Rand(pc0.colors_, Zero3d, Eigen::Vector3d(1.0, 1.0, 1.0), 0);
+    Rand(pc0.colors_, Eigen::Vector3d(0, 0, 0), Eigen::Vector3d(1.0, 1.0, 1.0),
+         0);
 
-    Rand(pc1.points_, Zero3d, Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
+    Rand(pc1.points_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
     Rand(pc1.normals_, Eigen::Vector3d(-1.0, -1.0, -1.0),
          Eigen::Vector3d(1.0, 1.0, 1.0), 0);
-    Rand(pc1.colors_, Zero3d, Eigen::Vector3d(1.0, 1.0, 1.0), 1);
+    Rand(pc1.colors_, Eigen::Vector3d(0, 0, 0), Eigen::Vector3d(1.0, 1.0, 1.0),
+         1);
 
     std::vector<Eigen::Vector3d> p;
     p.insert(p.end(), pc0.points_.begin(), pc0.points_.end());
@@ -357,15 +361,19 @@ TEST(PointCloud, OperatorADD) {
     pc1.normals_.resize(size);
     pc1.colors_.resize(size);
 
-    Rand(pc0.points_, Zero3d, Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
+    Rand(pc0.points_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
     Rand(pc0.normals_, Eigen::Vector3d(-1.0, -1.0, -1.0),
          Eigen::Vector3d(1.0, 1.0, 1.0), 0);
-    Rand(pc0.colors_, Zero3d, Eigen::Vector3d(1.0, 1.0, 1.0), 0);
+    Rand(pc0.colors_, Eigen::Vector3d(0, 0, 0), Eigen::Vector3d(1.0, 1.0, 1.0),
+         0);
 
-    Rand(pc1.points_, Zero3d, Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
+    Rand(pc1.points_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
     Rand(pc1.normals_, Eigen::Vector3d(-1.0, -1.0, -1.0),
          Eigen::Vector3d(1.0, 1.0, 1.0), 0);
-    Rand(pc1.colors_, Zero3d, Eigen::Vector3d(1.0, 1.0, 1.0), 1);
+    Rand(pc1.colors_, Eigen::Vector3d(0, 0, 0), Eigen::Vector3d(1.0, 1.0, 1.0),
+         1);
 
     std::vector<Eigen::Vector3d> p;
     p.insert(p.end(), pc0.points_.begin(), pc0.points_.end());
@@ -517,9 +525,12 @@ TEST(PointCloud, VoxelDownSample) {
     pc.normals_.resize(size);
     pc.colors_.resize(size);
 
-    Rand(pc.points_, Zero3d, Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
-    Rand(pc.normals_, Zero3d, Eigen::Vector3d(10.0, 10.0, 10.0), 0);
-    Rand(pc.colors_, Zero3d, Eigen::Vector3d(255.0, 255.0, 255.0), 0);
+    Rand(pc.points_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(1000.0, 1000.0, 1000.0), 0);
+    Rand(pc.normals_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(10.0, 10.0, 10.0), 0);
+    Rand(pc.colors_, Eigen::Vector3d(0, 0, 0),
+         Eigen::Vector3d(255.0, 255.0, 255.0), 0);
 
     double voxel_size = 0.5;
     auto output_pc = pc.VoxelDownSample(voxel_size);
